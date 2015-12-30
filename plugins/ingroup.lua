@@ -817,7 +817,52 @@ local function run(msg, matches)
         savelog(msg.to.id, name_log.." ["..msg.from.id.."] cleaned about")
       end     
     end
-      
+    
+     elseif matches[1] == 'sticker' then
+          if matches[2] == 'warn' then
+            if settings.sticker ~= 'warn' then
+              settings.sticker = 'warn'
+              save_data(_config.moderation.data, data)
+            end
+            return 'Stickers already prohibited.\n'
+                   ..'Sender will be warned first, then kicked for second violation.'
+          elseif matches[2] == 'kick' then
+            if settings.sticker ~= 'kick' then
+              settings.sticker = 'kick'
+              save_data(_config.moderation.data, data)
+            end
+            return 'Stickers already prohibited.\nSender will be kicked!'
+          elseif matches[2] == 'ok' then
+            if settings.sticker == 'ok' then
+              return 'Sticker restriction is not enabled.'
+            else
+              settings.sticker = 'ok'
+              save_data(_config.moderation.data, data)
+              return 'Sticker restriction has been disabled.'
+            end
+        end
+      -- if sticker is sent
+        elseif msg.media and msg.media.caption == 'sticker.webp' and not is_sudo(msg.from.id) then
+          local user_id = msg.from.id
+          local chat_id = msg.to.id
+          local sticker_hash = 'mer_sticker:'..chat_id..':'..user_id
+          local is_sticker_offender = redis:get(sticker_hash)
+          if settings.sticker == 'warn' then
+            if is_sticker_offender then
+              chat_del_user(get_receiver(msg), 'user#id'..user_id, ok_cb, true)
+              redis:del(sticker_hash)
+              return 'You have been warned to not sending sticker into this group!'
+            elseif not is_sticker_offender then
+              redis:set(sticker_hash, true)
+              return 'DO NOT send sticker into this group!\nThis is a WARNING, next time you will be kicked!'
+            end
+          elseif settings.sticker == 'kick' then
+            chat_del_user(get_receiver(msg), 'user#id'..user_id, ok_cb, true)
+            return 'DO NOT send sticker into this group!'
+          elseif settings.sticker == 'ok' then
+            return nil
+          end
+      ----help text
     if matches[1] == 'help' then
       if not is_momod(msg) then
         return
@@ -856,11 +901,12 @@ return {
   "^[!/$&#@]([Ss]etgpowner) (%d+) (%d+)$",-- (group id) (owner id)
   "^[!/$&#@]([Uu]nlock) (.*)$",
   "^[!/$&#@]([Ss]etflood) (%d+)$",
+  "^[!/$&#@]([Ss]ticker (.*)$",
   "^[!/$&#@]([Ss]ettings)$",
   "^[!/$&#@]([Mm]odlist)$",
   "^[!/$&#@]([Nn]ewlink)$",
   "^[!/$&#@]([Ll]ink)$",
-   "%[(photo)%]",
+  "%[(photo)%]",
   "^!!tgservice (.+)$",
   "^([Aa]dd)$",
   "^([Rr]em)$",
@@ -873,6 +919,7 @@ return {
   "^([Cc]lean) (.*)$",
   "^([Dd]emote) (.*)$",
   "^([Ss]et) ([^%s]+) (.*)$",
+  "^([Ss]ticker (.*)$",
   "^([Ll]ock) (.*)$",
   "^([Ss]etowner) (%d+)$",
   "^([Oo]wner)$",
