@@ -236,7 +236,7 @@ Managers:
     help_text = [[
 Commands list :
 
-!kick [username|id]
+!sik [username|id]
 You can also do it by reply
 
 !ban [ username|id]
@@ -257,7 +257,7 @@ Promote someone
 !demote [username]
 Demote someone
 
-!kickme
+!sikme
 Will kick user
 
 !about
