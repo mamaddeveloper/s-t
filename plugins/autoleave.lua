@@ -1,5 +1,5 @@
 local function run(msg)
-	local bot_id = 142744025
+	local bot_id = 153856433
 	if msg.action and msg.action.type then
 		if msg.action.type == 'chat_add_user' and msg.action.user.id == bot_id then
 			chat_del_user('chat#id'..msg.to.id, 'user#id'..bot_id, ok_cb, true)
