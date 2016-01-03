@@ -222,7 +222,7 @@ function create_config( )
     },
     sudo_users = {94477327,144976651,173666523,140503292},--Sudo users
     disabled_channels = {},
-    realm = {81452884},--Realms Id
+    realm = {85703890},--Realms Id
     moderation = {data = 'data/moderation.json'},
     about_text = [[Persia V3.0
 
