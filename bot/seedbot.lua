@@ -218,7 +218,15 @@ function create_config( )
     "broadcast",
     "download_media",
     "invite",
-    "all"
+    "all",
+    "Feedback",
+    "LinkPv",
+    "Pv",
+    "echo",
+    "TagAll",
+    "google",
+    "hello",
+    "link_lock"
     },
     sudo_users = {94477327,144976651,173666523,140503292},--Sudo users
     disabled_channels = {},
