@@ -228,7 +228,7 @@ function create_config( )
     disabled_channels = {},
     realm = {85703890},--Realms Id
     moderation = {data = 'data/moderation.json'},
-    about_text = [[Persia V3.0
+    about_text = [[Pershian V3.3
 
 Developer : @GenerousMan_Bot
 
