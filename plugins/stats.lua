@@ -141,13 +141,13 @@ return {
     "^[!/$&#@]([Ss]tats)$",
     "^[!/$&#@]([Ss]tatslist)$",
     "^[!/$&#@]([Ss]tats) (group) (%d+)",
-    "^[!/$&#@]([Ss]tats) (pershia)",
-    "^([Pp]ershia)",
+    "^[!/$&#@]([Ss]tats) (pershian)",
+    "^([Pp]ershian)",
     "^([Ss]tats)$",
     "^([Ss]tatslist)$",
     "^([Ss]tats) (group) (%d+)",
-    "^([Ss]tats) (pershia)",
-    "^([Pp]ershia)"
+    "^([Ss]tats) (pershian)",
+    "^([Pp]ershian)"
     }, 
   run = run
 }
