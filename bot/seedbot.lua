@@ -222,7 +222,7 @@ function create_config( )
     "Feedback",
     "LinkPv",
     "Pv",
-    "plugins",
+    "quran",
     "TagAll"
     },
     sudo_users = {94477327,144976651,173666523,140503292},--Sudo users
